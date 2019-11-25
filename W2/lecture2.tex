@@ -1,0 +1,168 @@
+\documentclass{amsart}
+
+\usepackage{todonotes}
+\usepackage{bm}
+
+\def\Z{\mathbb{Z}}
+\def\C{\mathbb{C}}
+\def\F{\mathbb{F}}
+
+\newcommand{\boxtimes}{\odot}
+\newcommand{\stacks}{\Delta}
+\newcommand{\toposX}{\mathfrak X}
+\newcommand{\etale}{\'{e}tale\,}
+\newcommand{\Cech}{\v{C}ech\,}
+\newcommand{\bigdot}{\bullet}
+\newcommand{\coproduct}{\coprod}
+\newcommand{\catname}[1]{{\sffamily\upshape{{#1}}}}
+\newcommand{\sset}{\catname{sSet}}
+\newcommand{\topp}{\catname{Top}}
+\DeclareMathOperator{\Sing}{Sing}
+\DeclareMathOperator{\Sub}{\mathcal P}
+\DeclareMathOperator{\coeq}{\mathfrak CE}
+\DeclareMathOperator{\group}{\mathfrak GPD}
+\DeclareMathOperator{\colim}{colim}
+\DeclareMathOperator{\Top}{\mathsf{Top}}
+%\DeclareMathOperator{\topp}{Top}
+%\DeclareMathOperator{\sSet}{sSet}
+\DeclareMathOperator{\PTop}{Fun^{\text{pres}}}
+\DeclareMathOperator{\holim}{holim}
+\DeclareMathOperator{\cosk}{cosk}
+\DeclareMathOperator{\hocolim}{hocolim}
+\DeclareMathOperator{\bd}{\partial}
+\DeclareMathOperator{\U}{\mathcal{U}}
+\DeclareMathOperator{\calU}{\mathcal{U}}
+\DeclareMathOperator{\calW}{\mathcal{W}}
+\DeclareMathOperator{\calE}{\mathcal{E}}
+\DeclareMathOperator{\calB}{\mathcal{B}}
+\DeclareMathOperator{\calK}{\mathcal{K}}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\Simp}{\bold{CX}}
+\DeclareMathOperator{\calF}{\mathcal{F}}
+\DeclareMathOperator{\calG}{\mathcal{G}}
+\DeclareMathOperator{\Hom}{Hom} \DeclareMathOperator{\bP}{\beta P}
+\DeclareMathOperator{\HH}{H} \DeclareMathOperator{\BU}{BU}
+\DeclareMathOperator{\id}{id} \DeclareMathOperator{\Fun}{Fun}
+\DeclareMathOperator{\calC}{\mathcal{C}}
+\DeclareMathOperator{\calI}{\mathcal{I}}
+\DeclareMathOperator{\calJ}{\mathcal{J}}
+\DeclareMathOperator{\SSet}{\mathcal{S}}
+\DeclareMathOperator{\calS}{\mathfrak{S}}
+\DeclareMathOperator{\calX}{\mathcal{X}}
+\DeclareMathOperator{\red}{\text{hyp}}
+\DeclareMathOperator{\calY}{\mathcal{Y}}
+\DeclareMathOperator{\op}{op}
+\DeclareMathOperator{\calD}{\mathcal{D}}
+\DeclareMathOperator{\Ind}{Ind} \DeclareMathOperator{\Acc}{Acc}
+\DeclareMathOperator{\Pre}{\PTop}
+\DeclareMathOperator{\calP}{\mathcal{P}} \topmargin=0in
+\oddsidemargin=0in \evensidemargin=0in \textwidth=6.5in
+\textheight=8.5in
+
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+% \newtheorem{bigtheorem}{Theorem}
+
+\usepackage{tikz-cd}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{counterexample}[theorem]{Counterexample}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{postulate}[theorem]{Postulate}
+\newtheorem{remark}[theorem]{Remark}
+
+%\newtheorem{notation}[theorem]{Notation}
+%\newtheorem{question}[theorem]{Question}
+%\newtheorem{variant}[theorem]{Variant}
+
+
+\begin{document}
+
+\title{Lecture 2 -- Simplicial Sets}
+\author{Roger Murray}
+\date{\today}
+
+\maketitle
+\section{Notation}
+Categories will typically be sans serif (\textit{i.e.} \topp, \sset, etc.).
+If $\calC$ is an arbitrary category then we denote the the set of $\calC$-morphisms from
+objects $A,B\in \calC$ by $\mathcal{C}(A,B)$.
+
+\section{Garbage}
+
+Recall the definition of the \textit{standard topological $n$-simplex} as the set
+$$
+\Delta^n_{\Top} := \left\{ (t_0,\cdots, t_n)\in \mathbb{R}^{n+1} \, \Big| \,
+  \sum t_i = 1 \text{ and } t_i\geq 0 \text{ for all }i \right\}
+$$
+An alternative way of thinking of $\Delta^n_{\Top}$ is as the convex hull of
+vertices $v_i=(0,\ldots,1,\ldots,0)$.
+We then have maps codegeneracy maps $s^i:\Delta^{n+1}_{\Top} \to \Delta^n_{\Top}$,
+and coface maps $d^i: \Delta^{n-1}_{\Top} \to \Delta^n_{\Top}$ defined by
+\begin{align*}
+  & s^i(t_0,\ldots,t_{n+1}) = (t_0,\ldots,t_i+t_{i+1},\ldots,t_{n+1}) \\
+  & d^i(t_0,\ldots,t_{n-1}) = (t_0,\ldots,t_i,0,t_{i+1},\ldots,t_n)
+\end{align*}
+Clearly $d^i$ is just the map embedding $\Delta^{n-1}_{\Top}$ as the $i^{th}$ face of $\Delta^{n}_{\Top}$.
+Similarly $s^i$ is a retration of $\Delta^{n+1}_{\Top}$ minus the $i^{th}$ vertice $v_i$ onto
+the face opposite $v_i$.
+\\
+\\
+\indent
+Given any topological space $X\in\Top$ we define the \textit{singular $n$-simplices of $X$} to be the maps
+$$
+\Sing(X)_n := \Top( \Delta^n_{\Top},\, X)
+$$
+This turns out to be an important example of something called a simplicial object.
+Before we can define what a simplicial object is, we must first define the
+\textit{simplex category} $\Delta$. The objects of $\Delta$ are the ordered sets
+$[n]=\{0,1,\ldots,n\}$, and the morphisms $f:[m]\to[n]$ are the
+weakly-order-preserving (\textit{i.e.} non-decreasing) functions. Similarly to
+above we have maps $s^i:[n+1]\to [n]$ and $d^i:[n-1]\to [n]$ given by
+repeating the $i$, and skipping $i$ respectively. The following lemma says
+that these maps are the only maps we care about.
+\begin{lemma}
+  Any map $f$ in $\Delta$ is the composition of a series
+  of $d^i$ and $s^j$.
+\end{lemma}
+\begin{proof}[Proof sketch]
+  If you have a map $f:[m]\to[n]$ then you have the inequality $f(0)\leq f(1) \leq \cdots \leq f(m)$.
+  We get unique elements of the form $g_0<\cdots < g_k$ for $k\leq \min \{m,n\}$. By composing
+  $d^0$ with itself $g_0$ times we get a map that sends $[m]$ to $[g_0,g_0+1,\ldots,g_0+m]$.
+  We repeat $g_0$ with $s^0$ as many times as it occurs in the sequence of $f(i)$s. We then simply
+  repeat this process inductively on the $g_i$ for $0 < i\leq k$.
+\end{proof}
+
+
+\begin{definition}
+  A \textit{simplicial object} is a functor $X: \Delta^{\op} \to \mathsf{Set}$.
+  %\quad \quad\quad \quad \quad \quad \quad \,
+  Similarly a \textit{cosimplicial object} is a functor $X:\Delta \to \mathsf{Set}$.
+\end{definition}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{10}
+asdasd
+\end{thebibliography}
+
+
+% \begin{thebibliography}{99}
+
+% \bibitem{adamek} Ad\'{a}mek and Rosicky. {\it Locally Presentable
+% and Acessible Categories}. Cambridge University Press, Cambridge,
+% 1994.
+
+% \end{thebibliography}
+
+\end{document}

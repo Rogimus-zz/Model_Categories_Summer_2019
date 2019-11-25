@@ -1,0 +1,111 @@
+\documentclass{amsart}
+
+\usepackage{todonotes}
+
+\def\Z{\mathbb{Z}}
+\def\C{\mathbb{C}}
+\def\F{\mathbb{F}}
+
+\newcommand{\boxtimes}{\odot}
+\newcommand{\stacks}{\Delta}
+\newcommand{\toposX}{\mathfrak X}
+\newcommand{\etale}{\'{e}tale\,}
+\newcommand{\Cech}{\v{C}ech\,}
+\newcommand{\bigdot}{\bullet}
+\newcommand{\coproduct}{\coprod}
+\DeclareMathOperator{\Sub}{\mathcal P}
+\DeclareMathOperator{\coeq}{\mathfrak CE}
+\DeclareMathOperator{\group}{\mathfrak GPD}
+\DeclareMathOperator{\colim}{colim}
+\DeclareMathOperator{\Top}{Top}
+\DeclareMathOperator{\PTop}{Fun^{\text{pres}}}
+\DeclareMathOperator{\holim}{holim}
+\DeclareMathOperator{\cosk}{cosk}
+\DeclareMathOperator{\hocolim}{hocolim}
+\DeclareMathOperator{\bd}{\partial}
+\DeclareMathOperator{\U}{\mathcal{U}}
+\DeclareMathOperator{\calU}{\mathcal{U}}
+\DeclareMathOperator{\calW}{\mathcal{W}}
+\DeclareMathOperator{\calE}{\mathcal{E}}
+\DeclareMathOperator{\calB}{\mathcal{B}}
+\DeclareMathOperator{\calK}{\mathcal{K}}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\Simp}{\bold{CX}}
+\DeclareMathOperator{\calF}{\mathcal{F}}
+\DeclareMathOperator{\calG}{\mathcal{G}}
+\DeclareMathOperator{\Hom}{Hom} \DeclareMathOperator{\bP}{\beta P}
+\DeclareMathOperator{\HH}{H} \DeclareMathOperator{\BU}{BU}
+\DeclareMathOperator{\id}{id} \DeclareMathOperator{\Fun}{Fun}
+\DeclareMathOperator{\calC}{\mathcal{C}}
+\DeclareMathOperator{\calI}{\mathcal{I}}
+\DeclareMathOperator{\calJ}{\mathcal{J}}
+\DeclareMathOperator{\SSet}{\mathcal{S}}
+\DeclareMathOperator{\calS}{\mathfrak{S}}
+\DeclareMathOperator{\calX}{\mathcal{X}}
+\DeclareMathOperator{\red}{\text{hyp}}
+\DeclareMathOperator{\calY}{\mathcal{Y}}
+\DeclareMathOperator{\op}{op}
+\DeclareMathOperator{\calD}{\mathcal{D}}
+\DeclareMathOperator{\Ind}{Ind} \DeclareMathOperator{\Acc}{Acc}
+\DeclareMathOperator{\Pre}{\PTop}
+\DeclareMathOperator{\calP}{\mathcal{P}} \topmargin=0in
+\oddsidemargin=0in \evensidemargin=0in \textwidth=6.5in
+\textheight=8.5in
+
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+% \newtheorem{bigtheorem}{Theorem}
+
+\usepackage{tikz-cd}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{counterexample}[theorem]{Counterexample}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{postulate}[theorem]{Postulate}
+\newtheorem{remark}[theorem]{Remark}
+
+%\newtheorem{notation}[theorem]{Notation}
+%\newtheorem{question}[theorem]{Question}
+%\newtheorem{variant}[theorem]{Variant}
+
+
+\begin{document}
+
+\title{\Large $\mathcal{M}_{\textbf{fgl}}$ is \textit{stacks} of fun!}
+\author{Roger Murray}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{10}
+
+\bibitem{hop}
+  Michael Hopkins.
+  \textit{Complex oriented cohomology theories and the language
+  of stacks.}
+  \newblock \texttt{
+    http://www.math.rochester.edu/u/faculty/doug/papers.html}
+
+
+\end{thebibliography}
+
+
+% \begin{thebibliography}{99}
+
+% \bibitem{adamek} Ad\'{a}mek and Rosicky. {\it Locally Presentable
+% and Acessible Categories}. Cambridge University Press, Cambridge,
+% 1994.
+
+% \end{thebibliography}
+
+\end{document}
