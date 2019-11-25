@@ -65,6 +65,7 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{fact}[theorem]{Fact}
 % \newtheorem{bigtheorem}{Theorem}
+\newtheorem{properties}[theorem]{Properties}
 
 \usepackage{tikz-cd}
 
@@ -84,7 +85,7 @@
 \begin{document}
 
 \title{Lecture 2 -- Simplicial Sets}
-\author{Roger Murray}
+\author{notes anotated by Roger Murray}
 \date{\today}
 
 \maketitle
@@ -100,7 +101,7 @@ $$
 \Delta^n_{\Top} := \left\{ (t_0,\cdots, t_n)\in \mathbb{R}^{n+1} \, \Big| \,
   \sum t_i = 1 \text{ and } t_i\geq 0 \text{ for all }i \right\}
 $$
-An alternative way of thinking of $\Delta^n_{\Top}$ is as the convex hull of
+Alternatively we may think of $\Delta^n_{\Top}$ as the convex hull of
 vertices $v_i=(0,\ldots,1,\ldots,0)$.
 We then have maps codegeneracy maps $s^i:\Delta^{n+1}_{\Top} \to \Delta^n_{\Top}$,
 and coface maps $d^i: \Delta^{n-1}_{\Top} \to \Delta^n_{\Top}$ defined by
@@ -108,8 +109,7 @@ and coface maps $d^i: \Delta^{n-1}_{\Top} \to \Delta^n_{\Top}$ defined by
   & s^i(t_0,\ldots,t_{n+1}) = (t_0,\ldots,t_i+t_{i+1},\ldots,t_{n+1}) \\
   & d^i(t_0,\ldots,t_{n-1}) = (t_0,\ldots,t_i,0,t_{i+1},\ldots,t_n)
 \end{align*}
-Clearly $d^i$ is just the map embedding $\Delta^{n-1}_{\Top}$ as the $i^{th}$ face of $\Delta^{n}_{\Top}$.
-Similarly $s^i$ is a retration of $\Delta^{n+1}_{\Top}$ minus the $i^{th}$ vertice $v_i$ onto
+Clearly $d^i$ is just the map embedding $\Delta^{n-1}_{\Top}$ as the $i^{th}$ face of $\Delta^{n}_{\Top}$, and $s^i$ is a retration of $\Delta^{n+1}_{\Top}$ minus the $i^{th}$ vertice $v_i$ onto
 the face opposite $v_i$.
 \\
 \\
@@ -126,7 +126,7 @@ weakly-order-preserving (\textit{i.e.} non-decreasing) functions. Similarly to
 above we have maps $s^i:[n+1]\to [n]$ and $d^i:[n-1]\to [n]$ given by
 repeating the $i$, and skipping $i$ respectively. The following lemma says
 that these maps are the only maps we care about.
-\begin{lemma}
+\begin{lemma}\label{compos}
   Any map $f$ in $\Delta$ is the composition of a series
   of $d^i$ and $s^j$.
 \end{lemma}
@@ -139,11 +139,136 @@ that these maps are the only maps we care about.
 \end{proof}
 
 
-\begin{definition}
-  A \textit{simplicial object} is a functor $X: \Delta^{\op} \to \mathsf{Set}$.
+\begin{definition} Let $\mathcal{C}$ be a category. A \textit{simplicial object
+  in $\mathcal{C}$} is a functor
+  $X: \Delta^{\op} \to \mathcal{C}$.
   %\quad \quad\quad \quad \quad \quad \quad \,
-  Similarly a \textit{cosimplicial object} is a functor $X:\Delta \to \mathsf{Set}$.
+  Similarly a \textit{cosimplicial object in $\mathcal{C}$} is a functor
+  $Y:\Delta \to \mathcal{C}$.
 \end{definition}
+We write $X_n$ and $Y^n$ for $X([n])$ and $Y([n])$ respectively, and hence we
+will often use the notation $X_\bullet$ and $Y^\bullet$ for $X$ and
+$Y$ respectively.
+Similarly we write $d_i,s_i$ and $d^i,s^i$ for the obvious maps in $\mathcal{C}$.
+
+
+\begin{example}
+  The standard simplices $\Delta^\bullet_{\Top}$ is a cosimplicial space.
+\end{example}
+\begin{example}
+  Given any space $X\in \Top$ we therefore have that
+  $\Sing(X)_\bullet$ is a simplicial set acting on objects by
+  $[n]\mapsto \Top(\Delta^n_{\Top}, \, X)$, and on morphisms by
+  $(f:[m]\to [n])\mapsto f_*$ where $f_*$ is precomposition
+  with $f$.
+\end{example}
+
+\begin{properties}\label{simplprops}
+  The degeneracy, and face maps satisfy the
+  \textit{simplicial properties}:
+  
+  \begin{enumerate}
+  \item $d_i\circ d_j = d_{j-1} \circ d_i$ for $i<j$
+  \item $s_i\circ s_j = s_{j+1}\circ s_i$ for $i\leq j$
+  \item Lastly, 
+    \begin{flalign*}
+      d_i\circ s_j = 
+     \begin{cases}
+       s_{j-1}\circ d_i &\text{ if } i<j\\
+       \id &\text{ if } i=j,j+1 \\
+       s_j\circ d_{i-1} &\text{ if } i>j+1
+     \end{cases}
+    \end{flalign*}
+  \end{enumerate}
+\end{properties}
+A dual statement holds for cosimplicial objects. These (dual) properties
+are obvious in the case of $\Delta$.
+We next construct a functor which is adjoint to $\Sing(\,\text{--}\,)_\bullet$.
+\\
+\\
+\indent
+Let $X$ be a simplicial object in a category $\mathcal{C}$.
+\begin{definition}
+  An $n$-simplex $x\in X_n$ is \textit{degenerate} if there exists
+  some $y\in X_{n-1}$ such that $x=s_i(y)$ for some $0\leq i\leq n-1$.
+\end{definition}
+\begin{definition}
+  The \textit{geometric realisation of $X$} is the space given by
+  $$
+  |X_\bullet| = \coprod_{n\geq 0} X_n\times \Delta^n  \,\Big/\sim
+  $$
+  where the equivalence relation is given by identifying
+  $(f^*x,u)\sim (y,f_*u)$ for any $f\in \Delta([m],[n])$, and
+  $x\in X_n$, and $u\in \Delta^m$.
+\end{definition}
+
+It turns out that it is enough to consider when $f$ is a degeneracy, or face map.
+This is an obvious result from \ref{compos} and the following lemma,
+
+\begin{lemma}
+  Every object $x\in X_n$ may be written uniquely as
+  $s_{i_1}\circ s_{i_2} \circ \cdots \circ s_{i_l} (y)$ such that
+  $i_1>\cdots > i_n$ and $y\in X_\bullet$ is non-degenerate.
+\end{lemma}
+\begin{proof}
+  By (2) of \ref{simplprops} it is easy to see that we can find an
+  increasing sequence $i_j$. Furthermore this sequence must terminate since
+  $x\in X_n$ and each degeneracy map increases degree by $1$. Thus we obtain
+  a $y$ such that $x=s_{i_1}\circ \cdots \circ s_{i_n} (y)$. All that is
+  left to check is that these are unique. This is immediate by starting
+  at $x$ and working backwards. 
+\end{proof}
+
+\begin{corollary}
+  Given a simplicial object $X$ in $\mathcal{C}$ then its geometric
+  realisation $|X|$ is a CW-complex with an $n$-cell for every non-degenerate
+  $n$-simplex $x\in X_n$.
+\end{corollary}
+For a proof of this see page 56 of \cite{May}.
+
+\begin{proposition}
+  The functors
+  \begin{tikzcd}
+    {|\text{ -- }|: \mathsf{sSet}} \arrow[r, shift right] &
+    {\arrow[l, shift right] \Top : \Sing}
+  \end{tikzcd}
+are adjoint.
+\end{proposition}
+\begin{proof}
+  We wish to show that, given any $X_\bullet\in \mathsf{sSet}$ and
+  any $Y\in \Top$, the sets
+  $\mathsf{sSet}(X_\bullet, \Sing(Y)_\bullet)$ and
+  $\Top(|X_\bullet|, Y)$ are in bijection.
+  This proof relies on the fact that any map $f_n\in \mathsf{sSet}(X_n,
+  \Sing(Y)_n)$ corresponds to a map
+  $\widetilde{f_n}: X_n\times \Delta^n_{\Top}\to Y$ where $\widetilde{f_n}(x,u) = f_n(x)(u)$.
+  If we now consider any map $g\in \Delta([m],[n])$ then we get the following commutative
+  diagram by definition
+  \[
+    \begin{tikzcd}
+      X_n \arrow[r,"f_n"] \arrow[d,"X(g)"] & {\mathsf{sSet(\Delta^n_{\Top},Y)}}
+      \arrow[d, "\left(\Delta^\bullet_{\Top} (g)\right)^*"]\\
+      X_m \arrow[r, "f_m"] &  {\mathsf{sSet(\Delta^m_{\Top},Y)}}
+    \end{tikzcd}
+  \]
+  By the existence of $\widetilde{f_n}$ in relation to $f_n$ this gives us the
+  following commutative diagram
+  \[
+    \begin{tikzcd}
+      X_n\times \Delta^m_{Top} \arrow[r,"\id \times \Delta_{\Top}^\bullet(g)"]
+      \arrow[d,"X(g)\times \id"]
+      & X_n\times \Delta^n_{\Top}
+      \arrow[d, "\widetilde{f_n}"]\\
+      X_m \times \Delta^m_{\Top} \arrow[r, "\widetilde{f_m}"]
+      &  {\mathsf{sSet(\Delta^m_{\Top},Y)}}
+    \end{tikzcd}
+  \]
+  Taking $g$ to be (a composition of the) $s^i$ 
+  gives us that $\widetilde{f_n}$ respects the equivalence relation defining
+  $|X_\bullet|$ and hence is a map $\widetilde{f_n}\in \Top(|X_\bullet|, Y)$.
+  We can go backwards in a similar fashion.
+\end{proof}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -153,7 +278,7 @@ that these maps are the only maps we care about.
 % Bibliography %%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{thebibliography}{10}
-asdasd
+  \bibitem{May} Jon Peter May, {\it Simplicial Objects in Algebraic Topology}, University of Chicago Press, 1982
 \end{thebibliography}
 
 
