@@ -1,5 +1,4 @@
 \documentclass{amsart}
-
 \usepackage{todonotes}
 \usepackage{amssymb}
 \usepackage{mathabx}
@@ -61,7 +60,7 @@
 \oddsidemargin=0in \evensidemargin=0in \textwidth=6.5in
 \textheight=8.5in
 
-\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
@@ -106,8 +105,8 @@ $$
 $$
 Alternatively we may think of $\Delta^n_{\Top}$ as the convex hull of
 vertices $v_i=(0,\ldots,1,\ldots,0)$.
-We then have maps codegeneracy maps $s^i:\Delta^{n+1}_{\Top} \to \Delta^n_{\Top}$,
-and coface maps $d^i: \Delta^{n-1}_{\Top} \to \Delta^n_{\Top}$ defined by
+We then have \textit{codegeneracy maps} $s^i:\Delta^{n+1}_{\Top} \to \Delta^n_{\Top}$,
+and \textit{coface maps} $d^i: \Delta^{n-1}_{\Top} \to \Delta^n_{\Top}$ defined by
 \begin{align*}
   & s^i(t_0,\ldots,t_{n+1}) = (t_0,\ldots,t_i+t_{i+1},\ldots,t_{n+1}) \\
   & d^i(t_0,\ldots,t_{n-1}) = (t_0,\ldots,t_i,0,t_{i+1},\ldots,t_n)
@@ -117,7 +116,7 @@ the face opposite $v_i$.
 \\
 \\
 \indent
-Given any topological space $X\in\Top$ we define the \textit{singular $n$-simplices of $X$} to be the maps
+Given any topological space $X\in\Top$ we define the \textit{singular $n$-simplices of $X$} to be the set of maps
 $$
 \Sing(X)_n := \Top( \Delta^n_{\Top},\, X)
 $$
@@ -130,12 +129,12 @@ above we have maps $s^i:[n+1]\to [n]$ and $d^i:[n-1]\to [n]$ given by
 repeating the $i$, and skipping $i$ respectively. The following lemma says
 that these maps are the only maps we care about.
 \begin{lemma}\label{compos}
-  Any map $f$ in $\Delta$ is the composition of a series
-  of $d^i$ and $s^j$.
+  Any map $f$ in $\Delta$ is the composition of some $d^i$ and $s^j$.
 \end{lemma}
 \begin{proof}[Proof sketch]
   If you have a map $f:[m]\to[n]$ then you have the inequality $f(0)\leq f(1) \leq \cdots \leq f(m)$.
-  We get unique elements of the form $g_0<\cdots < g_k$ for $k\leq \min \{m,n\}$. By composing
+  We obtain a unique chain of elements of the form $g_0<\cdots < g_k$
+  for $k\leq \min \{m,n\}$. By composing
   $d^0$ with itself $g_0$ times we get a map that sends $[m]$ to $[g_0,g_0+1,\ldots,g_0+m]$.
   We repeat $g_0$ with $s^0$ as many times as it occurs in the sequence of $f(i)$s. We then simply
   repeat this process inductively on the $g_i$ for $0 < i\leq k$.
@@ -167,8 +166,8 @@ Similarly we write $d_i,s_i$ and $d^i,s^i$ for the obvious maps in $\mathcal{C}$
 \end{example}
 
 \begin{properties}\label{simplprops}
-  The degeneracy, and face maps satisfy the
-  \textit{simplicial properties}:
+  The degeneracy, and face maps belonging to any simplicial object $X$ in
+  $\mathcal{C}$ satisfy the following,
   
   \begin{enumerate}
   \item $d_i\circ d_j = d_{j-1} \circ d_i$ for $i<j$
@@ -184,6 +183,7 @@ Similarly we write $d_i,s_i$ and $d^i,s^i$ for the obvious maps in $\mathcal{C}$
     \end{flalign*}
   \end{enumerate}
 \end{properties}
+We refer to these properties as the \textit{simplicial properties}.
 A dual statement holds for cosimplicial objects. These (dual) properties
 are obvious in the case of $\Delta$.
 We next construct a functor which is adjoint to $\Sing(\,\text{--}\,)_\bullet$.
@@ -382,11 +382,20 @@ $n-simplices$ of $X$. Our boundary maps are then the maps $d(x)=\sum_i (-1)^i
 d_i(x)$. Another way of stating this is that, by \ref{realisation}, $M(X)$ is the singular chain complex
 of $|X|$.
 
-\begin{theorem}
+\begin{theorem}\label{main}
   Let $X$ and $Y$ be simplicial sets. Then
   $M(X\times Y)\cong M(X)\otimes M(Y)$
 \end{theorem}
-\begin{proof}[Proof Sketch (PROBABLY IGNORE THIS MESS)]
+This follows from the following theorem,
+\begin{theorem}[The Eilenberg-Zilber theorem]
+  Given topological spaces $X$, $Y$, and their product $X\times Y$,
+  Then $$C_\bullet (X)\otimes C_\bullet (Y) \cong C_\bullet(X\times Y)$$
+  in the category of chain complexes.
+\end{theorem}
+\begin{proof}
+  See \cite{EZ}.
+\end{proof}
+\begin{proof}[Proof of \ref{main}]
   $\left(M(X)\otimes M(Y)\right)_n = \oplus_{i+j=n} M(X)_i \otimes M(Y)_j$.
   By \ref{compos} we have that $(x,y)$ is non-degenerate when either $x$ or
   $y$ is non-degenerate, or when they are incompatibly degenerate. By incompatibly
@@ -399,19 +408,18 @@ of $|X|$.
   has order of degeneracy 0. To see that the inequality
   holds note that if $(x,y)$ is non-degenerate in $(X\times Y)_n$ then we must have
   that the total order of degeneracy $l+k$ is less than or equal to $n$.
-  This follows since if $l+k >n$ then $x$ and $y$ could not possibly be incompatibly degenerate
-  by the pigeonhole principle. We may restate this succinctly as
-  $(x,y)$ non-degenerate in $X_n\times Y_n$ is
+  This follows since if $l+k >n$ then $x$ and $y$ could not possibly be
+  incompatibly degenerate by the pigeonhole principle. We may restate this
+  succinctly as $(x,y)$ non-degenerate in $X_n\times Y_n$ is
   a pair $(s_{i_l}\circ \cdots s_{i_1} x^\prime, s_{j_k}\circ
-  \cdots \circ s_{j_1}y^\prime)$ in $X_n\times Y_n$ where $j_r \neq i_s$ and where $x^\prime$ is
-  non-degenerate in $X_{n-l}$ and $y^\prime$ is non-degenerate in $Y_{n-k}$, where $l+k\leq n$.
+  \cdots \circ s_{j_1}y^\prime)$ in $X_n\times Y_n$ where $j_r \neq i_s$ and
+  where $x^\prime$ is
+  non-degenerate in $X_{n-l}$ and $y^\prime$ is non-degenerate in $Y_{n-k}$,
+  where $l+k\leq n$.
   Consider the pair $(x^\prime,y^\prime)$ in $X_{n-l}\times Y_{n-k}$.
-
-  I'm not exactly sure how the final part of this proof goes where we show that this 
-  corresponds to a unique pair with $l+k$ actually equal to $n$. Maybe we can
-  discuss this at the student meeting. If we managed to show that
-  $|X\times Y| = |X| \times |Y|$ then the Eilenberg-Zilber theorem \cite{EZ}
-  would give the result.
+  We therefore have that $|X\times Y| = |X| \times |Y|$. This allows us to use
+  the Eilenberg-Zilber theorem, which gives us the result (by the discussion
+  preceeding \ref{main}).
 \end{proof}
 
 \section{\sset  \, as a Model Category}
@@ -456,9 +464,9 @@ apparent next week.
 % Bibliography %%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{thebibliography}{10}
-\bibitem{May} Jon Peter May, {\it Simplicial Objects in Algebraic Topology}, University of Chicago Press, 1982
-\bibitem{EZ} Eilenberg, S., \& Zilber, J. (1953). {\it On Products of Complexes}. American Journal of Mathematics, 75(1), 200-204. doi:10.2307/2372629
-\bibitem{BK} Bousfield, A.K., \& Kan, D.M. (1972). {\it Homotopy Limits, Completions and Localizations}. Springer-Verlag Berlin Heidelberg.
+\bibitem[May]{May} Jon Peter May, {\it Simplicial Objects in Algebraic Topology}, University of Chicago Press, 1982
+\bibitem[EZ]{EZ} Eilenberg, S., \& Zilber, J. (1953). {\it On Products of Complexes}. American Journal of Mathematics, 75(1), 200-204. doi:10.2307/2372629
+\bibitem[BK]{BK} Bousfield, A.K., \& Kan, D.M. (1972). {\it Homotopy Limits, Completions and Localizations}. Springer-Verlag Berlin Heidelberg.
 \end{thebibliography} 
 
 

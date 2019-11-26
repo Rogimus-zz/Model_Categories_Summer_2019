@@ -1,12 +1,14 @@
 \message{ !name(lecture2.tex)}\documentclass{amsart}
 
 \usepackage{todonotes}
+\usepackage{amssymb}
+\usepackage{mathabx}
 
 \def\Z{\mathbb{Z}}
 \def\C{\mathbb{C}}
 \def\F{\mathbb{F}}
 
-\newcommand{\boxtimes}{\odot}
+%\newcommand{\boxtimes}{\odot}
 \newcommand{\stacks}{\Delta}
 \newcommand{\toposX}{\mathfrak X}
 \newcommand{\etale}{\'{e}tale\,}
@@ -22,8 +24,9 @@
 \DeclareMathOperator{\group}{\mathfrak GPD}
 \DeclareMathOperator{\colim}{colim}
 \DeclareMathOperator{\Top}{\mathsf{Top}}
+\DeclareMathOperator{\Natl}{Natl}
 %\DeclareMathOperator{\topp}{Top}
-%\DeclareMathOperator{\sSet}{sSet}
+\DeclareMathOperator{\msset}{\mathsf{sSet}}
 \DeclareMathOperator{\PTop}{Fun^{\text{pres}}}
 \DeclareMathOperator{\holim}{holim}
 \DeclareMathOperator{\cosk}{cosk}
@@ -64,6 +67,7 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{fact}[theorem]{Fact}
 % \newtheorem{bigtheorem}{Theorem}
+\newtheorem{properties}[theorem]{Properties}
 
 \usepackage{tikz-cd}
 
@@ -82,9 +86,11 @@
 
 \begin{document}
 
-\message{ !name(lecture2.tex) !offset(16) }
- defined by
+\message{ !name(lecture2.tex) !offset(302) }
 
-\message{ !name(lecture2.tex) !offset(44) }
+  in the category of chain complexes.
+\end{theorem}
+
+\message{ !name(lecture2.tex) !offset(386) }
 
 \end{document}
