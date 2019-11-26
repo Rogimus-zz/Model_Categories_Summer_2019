@@ -1,13 +1,14 @@
 \documentclass{amsart}
 
 \usepackage{todonotes}
-\usepackage{bm}
+\usepackage{amssymb}
+\usepackage{mathabx}
 
 \def\Z{\mathbb{Z}}
 \def\C{\mathbb{C}}
 \def\F{\mathbb{F}}
 
-\newcommand{\boxtimes}{\odot}
+%\newcommand{\boxtimes}{\odot}
 \newcommand{\stacks}{\Delta}
 \newcommand{\toposX}{\mathfrak X}
 \newcommand{\etale}{\'{e}tale\,}
@@ -23,8 +24,9 @@
 \DeclareMathOperator{\group}{\mathfrak GPD}
 \DeclareMathOperator{\colim}{colim}
 \DeclareMathOperator{\Top}{\mathsf{Top}}
+\DeclareMathOperator{\Natl}{Natl}
 %\DeclareMathOperator{\topp}{Top}
-%\DeclareMathOperator{\sSet}{sSet}
+\DeclareMathOperator{\msset}{\mathsf{sSet}}
 \DeclareMathOperator{\PTop}{Fun^{\text{pres}}}
 \DeclareMathOperator{\holim}{holim}
 \DeclareMathOperator{\cosk}{cosk}
@@ -90,11 +92,12 @@
 
 \maketitle
 \section{Notation}
-Categories will typically be sans serif (\textit{i.e.} \topp, \sset, etc.).
+Categories will typically be sans serif (\textit{i.e.} \topp, \sset, etc.) or caligraphric
+(\textit{i.e.} $\mathcal{C}$, $\mathcal{S}$, etc.).
 If $\calC$ is an arbitrary category then we denote the the set of $\calC$-morphisms from
-objects $A,B\in \calC$ by $\mathcal{C}(A,B)$.
+objects $A,B\in \mathcal{C}$ by $\mathcal{C}(A,B)$.
 
-\section{Garbage}
+\section{Simplices}
 
 Recall the definition of the \textit{standard topological $n$-simplex} as the set
 $$
@@ -195,17 +198,19 @@ Let $X$ be a simplicial object in a category $\mathcal{C}$.
 \begin{definition}
   The \textit{geometric realisation of $X$} is the space given by
   $$
-  |X_\bullet| = \coprod_{n\geq 0} X_n\times \Delta^n  \,\Big/\sim
+  |X_\bullet| = \coprod_{n\geq 0} X_n\times \Delta^n_{\Top}  \,\Big/\sim
   $$
   where the equivalence relation is given by identifying
   $(f^*x,u)\sim (y,f_*u)$ for any $f\in \Delta([m],[n])$, and
-  $x\in X_n$, and $u\in \Delta^m$.
+  $x\in X_n$, and $u\in \Delta^m_{\Top}$.
 \end{definition}
 
-It turns out that it is enough to consider when $f$ is a degeneracy, or face map.
-This is an obvious result from \ref{compos} and the following lemma,
-
-\begin{lemma}
+By \ref{compos} it is enough to consider when $f$ is a degeneracy, or face map.
+\\
+\\
+\indent
+We have the following useful lemma,
+\begin{lemma}\label{degen}
   Every object $x\in X_n$ may be written uniquely as
   $s_{i_1}\circ s_{i_2} \circ \cdots \circ s_{i_l} (y)$ such that
   $i_1>\cdots > i_n$ and $y\in X_\bullet$ is non-degenerate.
@@ -219,12 +224,22 @@ This is an obvious result from \ref{compos} and the following lemma,
   at $x$ and working backwards. 
 \end{proof}
 
-\begin{corollary}
-  Given a simplicial object $X$ in $\mathcal{C}$ then its geometric
+Given two simplicial sets $X$ and $Y$ we obtain another simplicial set
+$X\times Y$ defined by $(X\times Y)_n = X_n\times Y_n$. The above lemma
+implies that we may combine two degenerate simplices $x\in X_n$
+and $y\in Y_n$ to get a non-degenerate simplex $(x,y)$. This will be important
+below.
+
+\begin{lemma}\label{realisation}
+  Given a simplicial set $X$ its geometric
   realisation $|X|$ is a CW-complex with an $n$-cell for every non-degenerate
   $n$-simplex $x\in X_n$.
-\end{corollary}
-For a proof of this see page 56 of \cite{May}.
+\end{lemma}
+
+
+For a classical proof of this see page 56 of \cite{May}.
+
+
 
 \begin{proposition}
   The functors
@@ -255,7 +270,7 @@ are adjoint.
   following commutative diagram
   \[
     \begin{tikzcd}
-      X_n\times \Delta^m_{Top} \arrow[r,"\id \times \Delta_{\Top}^\bullet(g)"]
+      X_n\times \Delta^m_{\Top} \arrow[r,"\id \times \Delta_{\Top}^\bullet(g)"]
       \arrow[d,"X(g)\times \id"]
       & X_n\times \Delta^n_{\Top}
       \arrow[d, "\widetilde{f_n}"]\\
@@ -269,6 +284,169 @@ are adjoint.
   We can go backwards in a similar fashion.
 \end{proof}
 
+\begin{example}
+  We define the \textit{standard $n$-simplex} $\Delta^n$ as the simplicial set
+  given by letting its $k$-simplices be the set of maps $\Delta([k],[n])$.
+\end{example}
+
+\begin{lemma}
+  A $k$-simplex $x\in \Delta([k],[n])$ is non-degenerate if and only if
+  $x$ is injective.
+\end{lemma}
+\begin{proof}
+  This is immediate once one considers the effect of
+  $s_i$ (which is precomposition by $s^i$).
+\end{proof}
+\begin{lemma}\label{delreal}
+  The geometric realisation of $\Delta^n$ is $\Delta^n_{\Top}$. Similarly
+  the geometric realisation of $\Delta^n\times \Delta^m$ is
+  $\Delta^n_{\Top}\times \Delta^m_{\Top}$.
+\end{lemma}
+\begin{proof}
+  This first statement is a result of \ref{realisation}. The second statement
+  also requires \ref{degen}
+\end{proof}
+
+\begin{example}
+We then define a simplicial set called \textit{the boundary $\partial\Delta^n$
+of $\Delta^n$}. We define this by specifying that
+$(\partial \Delta^n)_k$ is the set of non-surjective maps
+$x\in \mathsf{sSet}([n],[k])$. Indeed $\partial \Delta^n$ is a subsimplex
+of $\Delta^n$, and it matches our intuition from
+$\Delta_{\Top}^n$ since any element of $(\Delta^n)_k$ which is the image of
+some $d^i$ is clearly not surjective. 
+\end{example}
+\begin{lemma}[The Yoneda Lemma]
+  Let $A$ be an object in a category $\mathcal{C}$ and let
+  $F: \mathcal{C}\to \mathsf{Set}$ be a functor.
+  There is an isomorphism of sets
+  $$
+  \Natl\left(\mathcal{C}(A,\_ \,), F\right)\cong F(A)
+  $$
+\end{lemma}
+It is not hard to find a proof of this, and even though the lemma
+is ubiquitous throughout category theory the proof is very straightforward.
+\\
+\\
+\indent
+An immediate consequence of the Yoneda lemma is,
+\begin{lemma}
+  Given a simplicial set $X_\bullet$ we have that
+  $$
+  X_n\cong \mathsf{sSet}(\Delta^n, X_\bullet)
+  $$
+\end{lemma}
+\section{Horns and Nerves}
+\begin{definition}
+  The horn $\Lambda^n_k$ is the simplicial subset of $\partial \Delta^n$ defined
+  by
+  $$
+  (\Lambda^n_k)_i = \left\{ x\in \Delta^n_k\, \big| \, x([k])\cup \{ i \} \supsetneq [n] \right \}
+  $$
+\end{definition}
+Intuitively one thinks of this as the boundary of $\Delta^n$ excluding the $i^{th}$ face.
+
+\begin{definition}
+  Let $\mathcal{C}$ be a small category. The \textit{nerve of $\mathcal{C}$} is
+  the simplicial set $N\mathcal{C}$ defined by
+  $$
+  N \mathcal{C}_n =  \left\{ C_0\xrightarrow{f_1}C_1\xrightarrow{f_2}\cdots \xrightarrow{f_n} C_n \right\}
+  $$
+  The maps $s_i$ and $d_i$ are defined as follows. Let $(f_1,\ldots, f_n)$
+  be an ordered $n$-tuple of composable maps in $\mathcal{C}$. We define $s_i$
+  to simply be the map $(f_1,\ldots,\id,\ldots,f_n)\in N \mathcal{C}_{n+1}$. The
+  map $d_i$ is slightly more complicated.
+  \[
+      d_i(f_1,\ldots,f_n) =
+    \begin{cases}
+      (f_2,\ldots,f_n) & \text{if }i=0,\\
+      (f_1,\ldots,f_i\circ f_{i+1}, \ldots, f_n) &\text{if }0<i<n,\\
+      (f_1,\ldots,f_{n-1}) &\text{if }i=n
+    \end{cases}
+  \]
+\end{definition}
+
+An important example of such a construction is the nerve of the category
+$\mathsf{G}$ associated to a group $G$. In this case $N\mathsf{G}_n=G^n$
+and thus the geometric realisation of $N \mathcal{C}$ is
+$$
+\coprod G^n\times \Delta^n_{\Top} \big/ \sim 
+$$
+This is isomorphic to the Eilenberg Maclane space $K(G,1)$.
+\\
+\\
+\indent
+Let $X$ be a simplicial set. We define $M: \msset \to \mathsf{Ch}_{\geq 0}$ by
+specifying $M(X)_n$ to the free abelian group generated by the non-degenerate
+$n-simplices$ of $X$. Our boundary maps are then the maps $d(x)=\sum_i (-1)^i
+d_i(x)$. Another way of stating this is that, by \ref{realisation}, $M(X)$ is the singular chain complex
+of $|X|$.
+
+\begin{theorem}
+  Let $X$ and $Y$ be simplicial sets. Then
+  $M(X\times Y)\cong M(X)\otimes M(Y)$
+\end{theorem}
+\begin{proof}[Proof Sketch (PROBABLY IGNORE THIS MESS)]
+  $\left(M(X)\otimes M(Y)\right)_n = \oplus_{i+j=n} M(X)_i \otimes M(Y)_j$.
+  By \ref{compos} we have that $(x,y)$ is non-degenerate when either $x$ or
+  $y$ is non-degenerate, or when they are incompatibly degenerate. By incompatibly
+  degenerate I mean that they decompose as
+  $x=s_{i_l}\circ\cdots \circ s_{i_1} x^\prime$ and
+  $y=s_{j_k}\circ \cdots \circ s_{j_1} y^\prime$ such that $s_{i_r}\neq s_{j_s}$
+  for all $r,s$. Let us refer to $l$ and $k$ from the decomposition above
+  as the order of degeneracy for
+  arbitrary degenerate elements $x$ and $y$ respectively. A non-degenerate element
+  has order of degeneracy 0. To see that the inequality
+  holds note that if $(x,y)$ is non-degenerate in $(X\times Y)_n$ then we must have
+  that the total order of degeneracy $l+k$ is less than or equal to $n$.
+  This follows since if $l+k >n$ then $x$ and $y$ could not possibly be incompatibly degenerate
+  by the pigeonhole principle. We may restate this succinctly as
+  $(x,y)$ non-degenerate in $X_n\times Y_n$ is
+  a pair $(s_{i_l}\circ \cdots s_{i_1} x^\prime, s_{j_k}\circ
+  \cdots \circ s_{j_1}y^\prime)$ in $X_n\times Y_n$ where $j_r \neq i_s$ and where $x^\prime$ is
+  non-degenerate in $X_{n-l}$ and $y^\prime$ is non-degenerate in $Y_{n-k}$, where $l+k\leq n$.
+  Consider the pair $(x^\prime,y^\prime)$ in $X_{n-l}\times Y_{n-k}$.
+
+  I'm not exactly sure how the final part of this proof goes where we show that this 
+  corresponds to a unique pair with $l+k$ actually equal to $n$. Maybe we can
+  discuss this at the student meeting. If we managed to show that
+  $|X\times Y| = |X| \times |Y|$ then the Eilenberg-Zilber theorem \cite{EZ}
+  would give the result.
+\end{proof}
+
+\section{\sset  \, as a Model Category}
+We can put a model category structure on the category of simplicial sets.
+We first define two sets $I= \bigcup_{n\geq 0}\msset (\partial \Delta^n, \Delta^n)$
+and $J= \left\{ \msset (\Lambda^n_k, \Delta^n)\, \big| \, n>0
+  \text{ and }0\leq k\leq n \right\}$.
+
+\begin{definition}
+  Given a map $f\in \msset (X,Y)$, we say $f$ is
+  \begin{itemize}
+  \item a fibration if $J \boxslash f$, which is to say that if
+    we have any map $p\in J$, and any $\Lambda^n_k \to X$
+    and $\Delta^n \to Y$, making the following diagram commute,
+    \[
+    \begin{tikzcd}
+      \Lambda^n_k \arrow[r] \arrow[d, "p"] & X \arrow[d, "f"] \\
+      \Delta^n \arrow[r] &Y
+    \end{tikzcd}
+  \]
+  then we must have a lift $h: \Delta^n \to X$ which commutes with the diagram,
+\item a weak equivalence if $|f|: |X|\to |Y|$ is a weak equivalence in
+  \topp,
+\item a cofibration if it is injective.
+\end{itemize}
+\end{definition}
+\begin{lemma}
+  This defines a model structure on $\msset$.
+\end{lemma}
+\begin{proof}
+  (I think we're showing this next lecture).
+\end{proof}
+I'm not entirey sure why we introduced the set $I$. I thought it would be used
+to define cofibrations but apparently not. Perhaps this will become
+apparent next week.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -278,8 +456,10 @@ are adjoint.
 % Bibliography %%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{thebibliography}{10}
-  \bibitem{May} Jon Peter May, {\it Simplicial Objects in Algebraic Topology}, University of Chicago Press, 1982
-\end{thebibliography}
+\bibitem{May} Jon Peter May, {\it Simplicial Objects in Algebraic Topology}, University of Chicago Press, 1982
+\bibitem{EZ} Eilenberg, S., \& Zilber, J. (1953). {\it On Products of Complexes}. American Journal of Mathematics, 75(1), 200-204. doi:10.2307/2372629
+\bibitem{BK} Bousfield, A.K., \& Kan, D.M. (1972). {\it Homotopy Limits, Completions and Localizations}. Springer-Verlag Berlin Heidelberg.
+\end{thebibliography} 
 
 
 % \begin{thebibliography}{99}
