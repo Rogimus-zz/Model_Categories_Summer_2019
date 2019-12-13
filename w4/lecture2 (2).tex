@@ -60,6 +60,15 @@
 \oddsidemargin=0in \evensidemargin=0in \textwidth=6.5in
 \textheight=8.5in
 
+
+\tikzset{
+    labln/.style={anchor=north, rotate=90, inner sep=.5mm}
+  }
+  \tikzset{
+    labls/.style={anchor=south, rotate=90, inner sep=.5mm}
+  }
+
+
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -95,8 +104,67 @@ Categories will typically be sans serif (\textit{i.e.} \topp, \sset, etc.) or ca
 (\textit{i.e.} $\mathcal{C}$, $\mathcal{S}$, etc.).
 If $\calC$ is an arbitrary category then we denote the the set of $\calC$-morphisms from
 objects $A,B\in \mathcal{C}$ by $\mathcal{C}(A,B)$.
+\section{Lectures}
+\subsection{stuff from lecture 1?}
+\begin{definition}
+  A \textit{model category} is a category $\mathcal{C}$ together with 3 distinct 
+  classes of maps - fibrations, cofirbrations and weak equivalences - 
+  satisfying  5 axioms. If we denote any fibration by $A\twoheadrightarrow B$,
+  any cofibration by $A\rightarrowtail B$, and any weak equivalence by
+  $A\xrightarrow{\sim}B$, then these axioms may be stated as follows:
 
-\section{Simplices}
+  \begin{enumerate}
+  \item[(M1)] $\mathcal{C}$ is bicomplete
+  \item[(M2)] Weak equivalences satisfy the 2/3 axiom, \textit{i.e.} given 
+    any diagram in $\mathcal{C}$ of the form
+    \[
+    \begin{tikzcd}
+      A\arrow[rr] \arrow[dr] & & B\\
+      &C\arrow[ur]
+    \end{tikzcd}
+    \] such that any two of the maps are weak equivalences, then the third must be
+    one also.
+  \item[(M3)] Any map $f\in \mathcal{C}(A,B)$ can be factored for some $C\in \mathcal{C}$
+    as either
+    \[
+      \begin{tikzcd}
+        A\arrow[r, tail, "\sim", "g"'] & C \arrow[r, twoheadrightarrow, "h"'] & B & \text{ or } &
+        A \arrow[r, tail, "g"] & C\arrow[r, twoheadrightarrow, "\sim", "h"'] & B  
+      \end{tikzcd}
+    \]
+  \item[(M4)]
+    Given either of the following commutative squares,
+    \[
+      \begin{tikzcd}
+        A\arrow[r]\arrow[d, tail, "\sim" labln, "g"'] &   X\arrow[d,twoheadrightarrow, "f"]
+        & & A\arrow[r]\arrow[d, tail, "g"'] &   X\arrow[d,twoheadrightarrow, "\sim" labls, "f"]
+        \\ B\arrow[r] &Y & \text{or} & B\arrow[r] &Y
+      \end{tikzcd}
+    \]
+    then there a lift $B\to X$ which commutes with the given diagram.
+
+  \item[(M5)]
+    If $f$ is a retract of $g$, and if $g$ is a fibration/cofibration/weak-equivalence
+    then $f$ is also. 
+  
+  \end{enumerate}
+\end{definition}
+\noindent
+Recall that we say $f:A\to B$ is a retract of $g: C\to D$ if their exist maps $i,r, j,s$
+making the following diagram commute,
+\[
+  \begin{tikzcd}
+    A \arrow[r, "i"]\arrow[d,"f"]\arrow[rr,bend left=30, "\id"] & C\arrow[r,"r"]\arrow[d,"g"] & A \arrow[d, "f"] \\
+    B \arrow[r, "j"] \arrow[rr,bend right=30, "\id"']& B \arrow[r, "s"]& B
+  \end{tikzcd}
+\]
+\begin{example}
+  The proto-typical example is \topp \, with fibrations the Serre fibrations,
+  and cofibrations and weak-equivalences decided accordingly (see chapter 4 of
+  \cite{Hat}).
+\end{example}
+
+\subsection{Lecture 2}
 
 Recall the definition of the \textit{standard topological $n$-simplex} as the set
 $$
@@ -395,7 +463,7 @@ This follows from the following theorem,
 \begin{proof}
   See \cite{EZ}.
 \end{proof}
-\begin{proof}[Proof of \ref{main} (IGNORE FOR NOW -- NOT COMPLETE)]
+\begin{proof}[Proof of \ref{main}]
   $\left(M(X)\otimes M(Y)\right)_n = \oplus_{i+j=n} M(X)_i \otimes M(Y)_j$.
   By \ref{compos} we have that $(x,y)$ is non-degenerate when either $x$ or
   $y$ is non-degenerate, or when they are incompatibly degenerate. By incompatibly
@@ -456,6 +524,10 @@ I'm not entirey sure why we introduced the set $I$. I thought it would be used
 to define cofibrations but apparently not. Perhaps this will become
 apparent next week.
 
+\section{Week 3}
+Update: it became apparent.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -467,6 +539,7 @@ apparent next week.
 \bibitem[May]{May} Jon Peter May, {\it Simplicial Objects in Algebraic Topology}, University of Chicago Press, 1982
 \bibitem[EZ]{EZ} Eilenberg, S., \& Zilber, J. (1953). {\it On Products of Complexes}. American Journal of Mathematics, 75(1), 200-204. doi:10.2307/2372629
 \bibitem[BK]{BK} Bousfield, A.K., \& Kan, D.M. (1972). {\it Homotopy Limits, Completions and Localizations}. Springer-Verlag Berlin Heidelberg.
+\bibitem[Hat]{Hat} Hatcher
 \end{thebibliography} 
 
 
