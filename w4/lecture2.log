@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7200 64-bit) (preloaded format=pdflatex 2019.10.14)  27 NOV 2019 09:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7200 64-bit) (preloaded format=pdflatex 2019.10.14)  13 DEC 2019 23:53
 entering extended mode
 **./lecture2.tex
 (lecture2.tex
@@ -825,25 +825,25 @@ File: pgflibraryarrows.meta.code.tex 2019/08/03 v3.1.4b (3.1.4b)
 ))) (lecture2.aux)
 \openout1 = `lecture2.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for U/mathx/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 86.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for U/mathx/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 95.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 86.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 95.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
@@ -909,50 +909,62 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
-ABD: EveryShipout initializing macros
-Underfull \hbox (badness 10000) in paragraph at lines 113--120
-
- []
-
-[1{C:/Users/roger/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 186--194
+ABD: EveryShipout initializing macros [1{C:/Users/roger/AppData/Local/MiKTeX/2.
+9/pdftex/config/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 181--188
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 208--213
+Underfull \hbox (badness 10000) in paragraph at lines 254--262
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 327--333
+Underfull \hbox (badness 10000) in paragraph at lines 276--281
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 374--384
+Underfull \hbox (badness 10000) in paragraph at lines 395--401
 
  []
 
 
-LaTeX Font Warning: Font shape `OT1/cmss/m/sc' in size <10> not available
-(Font)              Font shape `OT1/cmr/m/sc' tried instead on input line 425.
+Underfull \hbox (badness 10000) in paragraph at lines 442--452
 
-[4] [5] (lecture2.aux) ) 
+ []
+
+[4]
+
+LaTeX Font Warning: Font shape `OT1/cmss/m/sc' in size <10> not available
+(Font)              Font shape `OT1/cmr/m/sc' tried instead on input line 493.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 528--548
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 528--548
+
+ []
+
+[5] [6] (lecture2.aux) ) 
 Here is how much of TeX's memory you used:
- 15917 strings out of 492452
- 316085 string characters out of 3129807
- 356088 words of memory out of 3000000
- 19801 multiletter control sequences out of 15000+200000
+ 16226 strings out of 492452
+ 323805 string characters out of 3129807
+ 369371 words of memory out of 3000000
+ 20110 multiletter control sequences out of 15000+200000
  16581 words of font info for 58 fonts, out of 3000000 for 9000
  1302 hyphenation exceptions out of 8191
- 68i,18n,84p,441b,1092s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 68i,18n,84p,441b,1099s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\roger\AppData\Local\MiKTeX\2.9\fonts/pk/ljfo
 ur/public/mathabx/dpi600\mathb10.pk> <C:\Users\roger\AppData\Local\MiKTeX\2.9\f
 onts/pk/ljfour/public/mathabx/dpi420\mathx10.pk> <C:\Users\roger\AppData\Local\
 MiKTeX\2.9\fonts/pk/ljfour/public/mathabx/dpi600\matha5.pk> <C:\Users\roger\App
-Data\Local\MiKTeX\2.9\fonts/pk/ljfour/public/mathabx/dpi600\matha7.pk> <C:\User
-s\roger\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/mathabx/dpi600\mathx10.
+Data\Local\MiKTeX\2.9\fonts/pk/ljfour/public/mathabx/dpi600\mathx10.pk> <C:\Use
+rs\roger\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/mathabx/dpi600\matha7.
 pk> <C:\Users\roger\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/public/mathabx/dpi
 600\matha10.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx
 10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
@@ -969,9 +981,9 @@ s/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss1
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti8.pfb><C:/Program Files/MiKTeX 2.9
 /fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files/MiKTeX 2.9/fo
 nts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on lecture2.pdf (5 pages, 250056 bytes).
+Output written on lecture2.pdf (6 pages, 258315 bytes).
 PDF statistics:
- 194 PDF objects out of 1000 (max. 8388607)
+ 199 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  109 words of extra memory for PDF output out of 10000 (max. 10000000)
 
