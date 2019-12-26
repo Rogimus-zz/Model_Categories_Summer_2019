@@ -2,6 +2,8 @@
 \usepackage{todonotes}
 \usepackage{amssymb}
 \usepackage{mathabx}
+\usepackage{mathtools}
+\usepackage{pigpen}
 
 \def\Z{\mathbb{Z}}
 \def\C{\mathbb{C}}
@@ -17,6 +19,7 @@
 \newcommand{\catname}[1]{{\sffamily\upshape{{#1}}}}
 \newcommand{\sset}{\catname{sSet}}
 \newcommand{\topp}{\catname{Top}}
+\DeclareMathOperator{\cell}{cell}
 \DeclareMathOperator{\Sing}{Sing}
 \DeclareMathOperator{\Sub}{\mathcal P}
 \DeclareMathOperator{\coeq}{\mathfrak CE}
@@ -68,8 +71,7 @@
     labls/.style={anchor=south, rotate=90, inner sep=.5mm}
   }
 
-
-\newtheorem{theorem}{Theorem}[section]
+\newtheorem{theorem}{Theorem}[subsection]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
@@ -87,7 +89,7 @@
 \newtheorem{postulate}[theorem]{Postulate}
 \newtheorem{remark}[theorem]{Remark}
 
-%\newtheorem{notation}[theorem]{Notation}
+\newtheorem{notation}[theorem]{Notation}
 %\newtheorem{question}[theorem]{Question}
 %\newtheorem{variant}[theorem]{Variant}
 
@@ -104,8 +106,28 @@ Categories will typically be sans serif (\textit{i.e.} \topp, \sset, etc.) or ca
 (\textit{i.e.} $\mathcal{C}$, $\mathcal{S}$, etc.).
 If $\calC$ is an arbitrary category then we denote the the set of $\calC$-morphisms from
 objects $A,B\in \mathcal{C}$ by $\mathcal{C}(A,B)$.
-\section{Lectures}
-\subsection{stuff from lecture 1?}
+
+\section{comments for readers}
+This is a set of notes based on lectures given by Vigleik Angeltveit at
+the Australian National University in the (AUS) summer of 2019.
+For quite a few people who are taking this course this is their first
+early-graduate level course in algebraic topology, and hence I have
+tried to be very explicit (read: overly explicit) in much of the exposition.
+Furthermore, due to the pace of the course, many of the proofs are simplified
+or omitted. Where this has occured I have either attempted to generate my own
+proof, or I have replicated arguments from places such as \cite{Hov},
+[LURIE...]
+or nLab. Finally, since most people attending the class have complete
+board notes from the lectures, in order for these notes to be somewhat useful
+(for myself as writing practise, and for the students taking this course)
+I have inserted my own exposition and explanation throughout, and
+I may slightly deviate from Vigleik's own notes in certain places
+based on my own personal preferences.
+
+These notes are constantly being updated as the course won't be finished
+until at least the end of January, and I encourage you to check in regularly. 
+\section{model categories and some classical examples}
+\subsection{Model categories}
 \begin{definition}
   A \textit{model category} is a category $\mathcal{C}$ together with 3 distinct 
   classes of maps - fibrations, cofirbrations and weak equivalences - 
@@ -164,7 +186,7 @@ making the following diagram commute,
   \cite{Hat}).
 \end{example}
 
-\subsection{Lecture 2}
+\subsection{Simplicies and simlpicial sets}
 
 Recall the definition of the \textit{standard topological $n$-simplex} as the set
 $$
@@ -404,7 +426,7 @@ An immediate consequence of the Yoneda lemma is,
   X_n\cong \mathsf{sSet}(\Delta^n, X_\bullet)
   $$
 \end{lemma}
-\section{Horns and Nerves}
+\section{horns and nerves}
 \begin{definition}
   The horn $\Lambda^n_k$ is the simplicial subset of $\partial \Delta^n$ defined
   by
@@ -490,7 +512,7 @@ This follows from the following theorem,
   preceeding \ref{main}).
 \end{proof}
 
-\section{\sset  \, as a Model Category}
+\section{\sset  \, as a model category}
 We can put a model category structure on the category of simplicial sets.
 We first define two sets $I= \bigcup_{n\geq 0}\msset (\partial \Delta^n, \Delta^n)$
 and $J= \left\{ \msset (\Lambda^n_k, \Delta^n)\, \big| \, n>0
@@ -518,16 +540,15 @@ and $J= \left\{ \msset (\Lambda^n_k, \Delta^n)\, \big| \, n>0
   This defines a model structure on $\msset$.
 \end{lemma}
 \begin{proof}
-  (I think we're showing this next lecture).
+  (I think we may be proving this later but if not I'm sure it's somewhere
+  in \cite{Hov}.)
 \end{proof}
-I'm not entirey sure why we introduced the set $I$. I thought it would be used
-to define cofibrations but apparently not. Perhaps this will become
-apparent next week.
+You may be wondering why we went to the effort of defining the set $I$ when it
+appears we haven't used it in defining a model structure on
+$\mathsf{sSet}$. Our reason for including it will become apparent
+in the following section, where we define weak factorisation systems.
 
-\section{Weak factorisation systems}
-Update: it became apparent.
-\\
-\\ \indent
+\section{weak factorisation systems and the small object argument}
 Sadly, given an arbitrary model category $\mathcal{M}$, we can't expect the
 factorisation of a map (axiom M3) to be functorial. Indeed if you take
 (bounded) chain complexs of abelian groups then the factorisation of the
@@ -537,15 +558,20 @@ an extension problem. One way to rectify this is to
 simply require your factorisations
 to be functorial in M3 as in \cite{Hov}. Another way, however is to consider a
 nice subclass of model categories called \textit{cofibrantly generated model
-  categories} which we set out to define below. First though we observe some
+  categories}. Finally we give a useful
+method for constructing cofibrantly generated model categories from the
+small object argument due to Quillen [REFFF].
+
+
+\subsection{Weak factorisation systems}
+Let us first observe some
 properties of model categories as we have defined them.
-\\
 \\
 \indent
 From now on, given an arbitrary model category $\mathcal{M}$, let us denote
 the classes of fibrations by $Fib$, cofibrations by $coFib$ and weak-equivalences
-by $\mathcal{W}$.
-\begin{lemma}
+by $\mathcal{W}$. 
+\begin{lemma}\label{modelchar1}
       Given a model category $\mathcal{M}$ and a map $f\in \mathcal{M}(A,B)$, then
     \begin{enumerate}
     \item 
@@ -557,7 +583,7 @@ by $\mathcal{W}$.
 \end{lemma}
 The obvious mirror statement is true for fibrations,
 
-\begin{lemma}
+\begin{lemma}\label{modelchar2}
       Given a model category $\mathcal{M}$ and a map $f\in \mathcal{M}(A,B)$, then
     \begin{enumerate}
     \item 
@@ -566,7 +592,356 @@ The obvious mirror statement is true for fibrations,
       $f$ is an acyclic fibration if and only if
       $coFib \boxslash f$
     \end{enumerate}
-\end{lemma}
+  \end{lemma}
+
+  \begin{proof}
+    We begin by proving \ref{modelchar1}.1.
+    The forward direction follows immediately by definition. For the reverse
+    direction suppose we have a map $f:A\to B$ in $\mathcal{M}$ which lifts against
+    all acyclic fibrations. Then by (M3) we may factor $f$ as
+    \[
+      \begin{tikzcd}
+        A\arrow[r, tail, "i"'] & C \arrow[r, two heads, "j"', "\sim"] & B
+      \end{tikzcd}
+    \]
+    for some object $C\in \mathcal{M}$. This gives us the following commutative diagram,
+    \[
+      \begin{tikzcd}
+        A\arrow[r, tail, "i"]\arrow[d, "f"'] & C
+        \arrow[d, two heads, "j", "\sim" labls] \\
+        B \arrow[r, equal] & B
+      \end{tikzcd}
+    \]
+    and since $f$ lifts against all trivial fibrations we obtain a lift $h: B\to C$.
+    It's straightforward to see that the following diagram commutes as a result,
+    \[
+      \begin{tikzcd}
+        A\arrow[r, equal]\arrow[d, "f"'] &
+        A \arrow[r, equal] \arrow[d,"g", tail] & A \arrow[d,"f"]\\
+        B \arrow[r, "h"'] & C \arrow[r, "j"', "\sim"] & B
+      \end{tikzcd}
+    \]
+    Thus $f$ is a retract of $g$ which is a cofibration and therefore, by (M5),
+    $f$ is also a cofibration.
+    \\
+    \\
+    \indent
+    The proof of the other statements in lemmas \ref{modelchar1} and \ref{modelchar2}
+    are essentially identical.
+  \end{proof}
+  \begin{corollary}
+    \phantom{}
+    \begin{enumerate}
+    \item $coFib$ is closed under pushouts
+    \item $coFib\cap \mathcal{W}$ is closed under pushouts
+    \item similarly for $Fib$ and $Fib\cap \mathcal{W}$.
+    \end{enumerate}
+  \end{corollary}
+  \begin{proof}
+    Suppose we have a pushout square
+    \[
+      \begin{tikzcd}
+        A\arrow[r,"i"] \arrow[d, tail, "g"']
+        & C \arrow[d, "f"] \\
+        B\arrow[r,"j"'] & D
+      \end{tikzcd}
+    \]
+    We wish to show that $f$ is a cofibration. By the above lemmas it is
+    sufficient to show that $f$ has the left lifting property in relation
+    to $Fib\cap \mathcal{W}$. Let us consider the following diagram,
+    \[
+      \begin{tikzcd}
+        A\arrow[r,"i"] \arrow[d, tail, "g"'] & C \arrow[d, "f"]\arrow[r] & X
+        \arrow[d, two heads, "\sim" labln]\\
+        B\arrow[r,"j"'] & D \arrow[r] &Y
+      \end{tikzcd}
+    \]
+    If the righthand square (and hence the whole diagram)
+    commutes     then
+    since $g$ is a cofibration we get a lift of the outer square $h:B\to X$.
+    Now by appealing to the universal property of a pushout square we obtain
+    a map $h^\prime : D\to X$ which is a lift for $f$, and hence $f$ is a
+    cofibration.
+    \\
+    \\
+    \indent
+    The proof for the other cases is similar.
+  \end{proof}
+  \begin{notation}
+     Given a set of maps $S$ in a category
+  $\mathcal{D}$ let us denote the set of maps which lift on the left of
+  all maps in $S$ by $\prescript{\boxslash}{}{S}$, and all maps which lift on
+  the right by $S^{\,\boxslash}$. We say a map $\sigma\in \prescript{\boxslash}{}{S}$
+  has the left-lifting property with respect to $S$, and similarly for
+  $\sigma \in S^{\,\boxslash}$.
+  \end{notation}
+  We next present an important definition.
+  \begin{definition}
+    Given a category $\mathcal{C}$ a weak factorisation system (WFS) on $\mathcal{C}$
+    is a pair $(L,R)$, where $L$ and $R$ are classes of maps satisfying the
+    following conditions,
+    \begin{enumerate}
+    \item any map $f\in \mathcal{C}(X,Y)$ factors as $
+      \begin{tikzcd}
+        X\arrow[r, "i"] & Z \arrow[r, "j"] & Y
+      \end{tikzcd}
+      $ where $i\in L$ and $j\in R$.
+    \item $L=\prescript{\boxslash}{}{R}\,$ and $\,R=L^{\,\boxslash}$
+    \end{enumerate}
+  \end{definition}
+
+  \begin{example}
+    By lemma \ref{modelchar1} and \ref{modelchar2}
+    any model category $\mathcal{M}$ has at least
+    two weak factorisation systems
+    on itself, namely $(coFib, Fib\cap \mathcal{W})\,$ and $\,
+    (coFib\cap \mathcal{W}, Fib)$.
+  \end{example}
+  
+  \subsection{Cofibrantly generated model categories}
+  
+  \begin{definition}
+    Given a set $I$ of maps in $\mathcal{C}$, a \textit{relative $I$-cell}
+    is the pushout of transfinite-compositions of maps in $I$. We denote
+    to the set of $I$-cells in $\mathcal{C}$ by cell$(I)$.
+  \end{definition}
+  Let us unpack this. First suppose we have some ordinal
+  $\alpha$, and some functor $X_\bullet:\alpha\to \mathcal{C}$
+  with the properties that
+
+  \begin{enumerate}
+  \item the successor map is sent to a` map $X_\bullet(s):X_\bullet \to
+    X_{\bullet+1}$ with $X_i(s)\in I$ for all $i\in \alpha$
+  \item given any ordinal $a\in \alpha$ we have that:
+    $X_a = \colim X_\bullet$ where the colimit is taken over the set
+    of ordinals less than $a$.
+  \end{enumerate}
+  Then a relative $I$-cell is the map $X_0\to X_\alpha := \colim X_\bullet$
+  induced by composing the successor maps,
+  \[
+    \begin{tikzcd}
+      X_0\arrow[r,"X_0(s)"] & X_1 \arrow[r,"X_1(s)"] &X_2 \arrow[r]& \cdots
+      \arrow[r] &X_\alpha
+    \end{tikzcd}
+  \]
+  It's easy to see 
+  that the definition presented in class is this definition in the special
+  case that $\alpha= \omega$.
+
+  \begin{definition}
+    An object $A\in \mathcal{C}$  is a
+    \textit{small object in $\mathcal{C}$} (or a $\kappa$-small object)
+    if there exists some cardinal $\kappa$ such that the
+    functor $\hom_\mathcal{C}(A,\underline{\phantom{A}}\,) $ preserves $\kappa$-directed colimits.
+  \end{definition}
+  The last property (which is refered to as being \textit{$\kappa$-compact})
+  says that given some poset $\mathsf{J}$ with the property that any
+  sub-poset $\mathsf{J}^\prime$ of cardinality $<\kappa$ has an upper-bound in
+  $\mathsf{J}$,  and some functor $F: \mathsf{J}\to \mathcal{C}$,
+  then the canonical map
+    \[
+      \begin{tikzcd}
+        \colim_{\mathsf{j} \,\in \mathsf{J}} \hom_\mathcal{C}(A,
+        F(\mathsf{j}))\arrow[r]
+        & \hom_\mathcal{C}(A,
+        \colim_ {\mathsf{j} \,\in \mathsf{J}} F(\mathsf{j}))
+      \end{tikzcd}
+    \]
+    arising from the universal property of the lefthand side (after mapping each
+    $\hom_\mathcal{C}(A,F(d)) \to \hom_\mathcal{C}(A, \colim_d F(d))$ by
+    post-composition with the obvious inclusion $F(d)\to \colim_d F(d)$)
+    is actually an isomorphism.
+
+    We are also interested in the case where we have some full-subcategory
+    $\mathcal{D}\subset \mathcal{C}$. In this case our
+    we simply replace the functor above by $F: \mathsf{J}\to \mathcal{D}$,
+    and leave everything else the same. In this context we say
+    $A$ is \textit{small relative to $\mathcal{D}$}.
+
+
+    
+  \begin{definition}
+    A model category $\mathcal{M}$ is \textit{cofibrantly generated} if
+    there are sets of morphisms $I,J$ such that
+    \begin{enumerate}
+    \item The retracts of any $I$-cell are all the
+      cofibrations
+    \item The retracts of any $J$-cell are all the
+      acyclic cofibrations
+    \item The domains of maps in $I$ are small relative to
+      $\cell(I)$
+    \item The domains of maps in $J$ are small relative to
+      $\cell(J)$
+    \end{enumerate}
+  \end{definition}
+  The idea of this definition is that we think of $I$ as generating the set
+  of cofibrations, and we think of $J$ as generating the trivial cofibrations.
+  We make this precise in the following proposition,
+
+  \begin{proposition}\label{generators}
+    Suppose $\mathcal{M}$ is a cofibrantly generated model category.
+    Then the retracts of $\cell(I)$ are exactly the elements of
+    \,
+    $\prescript{\boxslash}{}{\left( I ^{\,\boxslash}\right)}$,
+    and the retracts of $\cell(J)$ are exactly the elements of
+    \,
+    $\prescript{\boxslash}{}{\left( J ^{\,\boxslash}\right)}$
+  \end{proposition}
+  The proof will be delayed until later.
+  \subsection{The small object argument}
+
+  \begin{theorem}[Small Object Argument]
+    Let $I$ be a set of maps in a category $\mathcal{C}$.
+    If $\mathcal{C}$ is cocomplete, and if the domain of any map in $I$ is
+    small, then all maps $f\in \mathcal{C}(X,Y)$ factor as
+    \[
+      \begin{tikzcd}
+        X\arrow[r, "i"] & Z \arrow[r, "s"] & Y
+      \end{tikzcd}
+    \]
+    where $i$ is a relative $I$-cell, and $s\in I^{\,\boxslash}$ 
+  \end{theorem}
+  \begin{proof}
+    Given some morphism $f\in \mathcal{C}(X,Y)$
+    consider the set of all commutative squares of the form
+    \[
+      \begin{tikzcd}
+        A\arrow[r]\arrow[d,"i"'] & X \arrow[d,"f"] \\
+        B \arrow[r] & Y
+      \end{tikzcd}
+    \]
+    where $i\in I$.  Call this set of squares $S$. Taking coproducts
+    gives rise to the following diagram,
+    \[
+      \begin{tikzcd}
+        \coprod_{s\,\in S} A_s \arrow[d, "\coprod i_s"'] \arrow[r] & X
+        \arrow[d,"f"]\\
+        \coprod_{s\,\in S} B_s \arrow[r] & Y
+      \end{tikzcd}
+    \]
+    We can take a pushout to get the following diagram,
+    \[
+      \begin{tikzcd}
+        \coprod_{s\,\in S} A_s \arrow[d, "\coprod i_s"'] \arrow[r] & X
+        \arrow[d] \arrow[ddr,bend left, "f"] &\\
+        \coprod_{s\,\in S} B_s \arrow[r]\arrow[drr, bend right] & Z_1
+        \arrow[dr, dashed] & \\
+        & & Y
+      \end{tikzcd}
+    \]
+    Choose some cardinal $\kappa$ such that all domains in $I$ are
+    $\kappa$-small. We may assume that $\kappa$ is infinite since
+    if $\alpha<\beta$ are cardinals then $\alpha$-smallness
+    implies $\beta$-smallness.
+    We continue this inductively over the natural numbers. Given the limit
+    ordinal $\omega$, we then define $Z_\omega$ to be
+    $\colim_{\alpha<\omega} Z_\alpha$. We repeat this process --
+    taking pushout squares for all successor ordinals, and
+    taking the colimit of all small successor ordinals
+    for limit ordinals. This gives us a map
+    $X\to Z$ (which is clearly a relative $I$-cell),
+    and hence also the following commutative square,
+    \[
+      \begin{tikzcd}
+        A\arrow[r]\arrow[d] & Z \arrow[d, "s"]\\
+        B\arrow[r] & Y
+      \end{tikzcd}
+    \]
+    The final thing for us to show is that $s\,\in I^{\,\boxslash}$.
+    To see that we wish to produce a lift $B\to Z$.
+    Since we assumed that any possible choice of $A$ is
+    $\kappa$-small we know that the map $A\to Z$
+    factor through $Z_\alpha$ for some $\alpha<\kappa$.
+    Taking the pushout of the obvious diagram gives us a map
+    $B\to Z_{\alpha+1}$ which produces the lift we were looking for
+    by composing with the inclusion $Z_{\alpha+1}\hookrightarrow Z$. 
+    Hence we may
+    factor the map $X\to Y$ as $$X\to Z\to Y$$
+    where the map $X\to Z$ is a relative $I$-cell, and where the map
+    $Z\to Y$ has the right lifting property with respect to
+    $I$.
+  \end{proof}
+  \begin{remark}
+    The set-theoretic reason why we ask for $I$ to be a set and not a class
+    is because we want to be guarenteed the existence of a single
+    cardinal $\kappa$ such that each of the domains of maps in $I$
+    is $\kappa$-small. If we dropped this requirement, it is possible that
+    we could find some model category, some $I$ (perhaps a proper class),
+    and some $f$ such that no
+    $\kappa$ exists, and then our argument would fall apart.
+  \end{remark}
+  We now return to the proof of $\ref{generators}$.
+  \begin{proof}[Proof of \ref{generators}]
+   
+    The proof is the same regardless of choice of $I$ or $J$, so consider $I$.
+    Clearly, any retract of an $I$-cell is in
+    $\prescript{\boxslash}{}{\left( I ^{\,\boxslash}\right)}$, so we only
+    need to show the reverse inclusion.
+
+    Suppose we have an element $f:A\to C\in
+    \prescript{\boxslash}{}{\left( I ^{\,\boxslash}\right)}$. Then
+    we may factor this (by the small-object argument) as the
+    composition of maps 
+    \[
+      \begin{tikzcd}
+        A \arrow[r, "i"] & B \arrow[r, "s"] &C
+      \end{tikzcd}
+    \]
+    where $i$ is a retract of an element of $\cell(I)$, and where
+    $s$ is in $I^{\,\boxslash}$. We then get the following commutative diagram,
+    \[
+      \begin{tikzcd}
+        A \arrow[d, "f"'] \arrow[r, "i"]& B \arrow[d, "s"] \\
+        C \arrow[r, equals] & C
+      \end{tikzcd}
+    \]
+    and since $s\in I^{\,\boxslash}$, we obtain a lift $\ell :
+    C\to B$.
+    This fits into the following commutative diagram,
+    \[
+      \begin{tikzcd}
+        A \arrow[d, "f"'] \arrow[r, equals]& A \arrow[d, "i"] \arrow[r,equals]
+        & A \arrow[d, "f"]\\
+        C \arrow[r, "\ell"'] & B \arrow[r, "s"'] & C
+      \end{tikzcd}
+    \]
+    and thus $f$ is a retract of an element of $\cell(I)$ as we wanted to show.
+  \end{proof}
+  \subsection{Constructing cofibrantly generated model categories}
+  \begin{theorem}
+    Suppose you have a bicomplete category $\mathcal{C}$, a subcategory
+    $\mathcal{W}\subset \mathcal{C}$, and two sets of maps
+    $I$ and $J$. Then these produce a cofibrantly generated model
+    structure if and only if
+    \begin{enumerate}
+    \item $\mathcal{W}$ satisfies the $2/3$ property
+    \item The domains of maps in $I$ are small relative to $\cell(I)$
+    \item The domains of maps in $J$ are small relative to $\cell(J)$
+    \item $\cell(J)\subset \mathcal{W}\cap \prescript{\boxslash}{}{
+        (I^{\,\boxslash})}$
+    \item $I^{\,\boxslash}\subset \mathcal{W}\cap J^{\,\boxslash}$
+    \item Either \,\,$\mathcal{W}\cap \prescript{\boxslash}{}{
+        (I^{\,\boxslash})} \subset \prescript{\boxslash}{}{
+        (J^{\,\boxslash})}$ \,\,or\,\, 
+      $\mathcal{W}\cap J^{\,\boxslash}\subset I^{\,\boxslash}$
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    Clearly if $\mathcal{C}$ is a cofibrantly generated model
+    category, then these conditions are satisfied.
+    Let us consider the converse situation.
+
+    The axioms M1, M2, and M5 are satisfied trivially by definition.
+    The factorisation axiom M3 follows from the small object argument.
+    Hence all that's left to check is the lifting axiom M4.
+
+    Let us first assume that 
+    $\mathcal{W}\cap \prescript{\boxslash}{}{
+        (I^{\,\boxslash})} \subset \prescript{\boxslash}{}{
+        (J^{\,\boxslash})}$. Clearly then trivial cofibrations
+      lift against fibrations since $J^{\,\boxslash}$ 
+  \end{proof}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,57 @@
+(TeX-add-style-hook
+ "lecture2"
+ (lambda ()
+   (TeX-run-style-hooks
+    "latex2e"
+    "amsart"
+    "amsart10"
+    "todonotes"
+    "amssymb"
+    "mathabx"
+    "mathtools"
+    "pigpen"
+    "tikz-cd")
+   (TeX-add-symbols
+    '("catname" 1)
+    "stacks"
+    "toposX"
+    "etale"
+    "Cech"
+    "bigdot"
+    "coproduct"
+    "sset"
+    "topp"
+    "Z"
+    "C"
+    "F")
+   (LaTeX-add-labels
+    "compos"
+    "simplprops"
+    "degen"
+    "realisation"
+    "delreal"
+    "main"
+    "modelchar1"
+    "modelchar2")
+   (LaTeX-add-bibitems
+    "May"
+    "EZ"
+    "BK"
+    "Hat"
+    "Hov")
+   (LaTeX-add-amsthm-newtheorems
+    "theorem"
+    "lemma"
+    "proposition"
+    "corollary"
+    "fact"
+    "properties"
+    "definition"
+    "example"
+    "counterexample"
+    "conjecture"
+    "postulate"
+    "remark"
+    "notation"))
+ :latex)
+
