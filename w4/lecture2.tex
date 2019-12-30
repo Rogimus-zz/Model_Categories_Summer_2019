@@ -116,7 +116,7 @@ tried to be very explicit (read: overly explicit) in much of the exposition.
 Furthermore, due to the pace of the course, many of the proofs are simplified
 or omitted. Where this has occured I have either attempted to generate my own
 proof, or I have replicated arguments from places such as \cite{Hov},
-[LURIE...]
+\cite{Lur}
 or nLab. Finally, since most people attending the class have complete
 board notes from the lectures, in order for these notes to be somewhat useful
 (for myself as writing practise, and for the students taking this course)
@@ -914,7 +914,8 @@ The obvious mirror statement is true for fibrations,
     $I$ and $J$. Then these produce a cofibrantly generated model
     structure if and only if
     \begin{enumerate}
-    \item $\mathcal{W}$ satisfies the $2/3$ property
+    \item $\mathcal{W}$ satisfies the $2/3$ property,
+      and is closed under taking retracts
     \item The domains of maps in $I$ are small relative to $\cell(I)$
     \item The domains of maps in $J$ are small relative to $\cell(J)$
     \item $\cell(J)\subset \mathcal{W}\cap \prescript{\boxslash}{}{
@@ -938,9 +939,42 @@ The obvious mirror statement is true for fibrations,
     Let us first assume that 
     $\mathcal{W}\cap \prescript{\boxslash}{}{
         (I^{\,\boxslash})} \subset \prescript{\boxslash}{}{
-        (J^{\,\boxslash})}$. Clearly then trivial cofibrations
-      lift against fibrations since $J^{\,\boxslash}$ 
+        (J^{\,\boxslash})}$. Clearly then any trivial cofibration
+      lifts against fibrations $J^{\,\boxslash}$.
+      If instead we have a trivial fibration $f:A\to C$
+      we factor it using the small object argument as
+      a relative $I$-cell complex $i:A\to B$
+      followed by a map $s:B\to C$
+      in $I^{\,\boxslash}$. By 2/3 we have that
+      $i$ is trivial, and hence $f$ lifts
+      against $i$,
+    \[
+      \begin{tikzcd}
+        A \arrow[d, "i"'] \arrow[r,equals]& A \arrow[d, "f"]\\
+        B \arrow[r, "s"]
+        \arrow[ur, dashed, "h"] & C
+      \end{tikzcd}
+    \]
+    Then we get the following retract diagram,
+    \[
+      \begin{tikzcd}
+        A \arrow[d, "f"'] \arrow[r,"i"]& B \arrow[d, "s"] \arrow[r,
+        "h"]
+        & A \arrow[d, "f"]\\
+        C \arrow[r, equals] & C \arrow[r, equals] & C
+      \end{tikzcd}
+    \]
+    Hence $f$ is a retract of $s$, and therefore has the
+    right lifting property with respect to $I$, and therefore
+    cofibrations $\prescript{\boxslash}{}{\left( I ^{\,\boxslash}\right)}$
+    lift against $f$.
+
+    The proof for the assumption
+    $\mathcal{W}\cap J^{\,\boxslash}\subset I^{\,\boxslash}$ is similar.
   \end{proof}
+
+  \section{homotopy categories}
+  \section{quillen adjunctions \& and equivalences}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -953,7 +987,8 @@ The obvious mirror statement is true for fibrations,
 \bibitem[EZ]{EZ} Eilenberg, S., \& Zilber, J. (1953). {\it On Products of Complexes}. American Journal of Mathematics, 75(1), 200-204. doi:10.2307/2372629
 \bibitem[BK]{BK} Bousfield, A.K., \& Kan, D.M. (1972). {\it Homotopy Limits, Completions and Localizations}. Springer-Verlag Berlin Heidelberg.
 \bibitem[Hat]{Hat} Hatcher
-\bibitem[Hov]{Hov} Hovey
+\bibitem[Hov]{Hov} Hovey model cats
+\bibitem[Lur]{Lur} Jacob Lurie, Kerodon
 \end{thebibliography} 
 
 
